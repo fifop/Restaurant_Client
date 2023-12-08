@@ -1,0 +1,11 @@
+.background-About{
+    position: relative;
+    width: 100%;
+    height: 140vh;
+    background-image: url('../../../../../public/images/324935.jpg'); /* Add your background image here */
+    background-size:cover;
+    background-position: center;
+    /* background-attachment: fixed; */
+    /* z-index: 99999999999; */
+    border: solid white 1px;
+  }

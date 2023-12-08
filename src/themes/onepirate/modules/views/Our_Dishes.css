@@ -1,0 +1,28 @@
+/* .backgruond {
+    background-color:rgb(204 196 149) ;
+    background-image: url('../../../../../public/images/309291.jpg');
+    opacity: 0.8;
+} */
+
+
+.background {
+    position: relative;
+    background-color: rgb(204, 196, 149); 
+    z-index: 1;
+    border: white solid 1px;
+  }
+  
+  .background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../../../../public/images/309291.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: -1;
+  }
+  
