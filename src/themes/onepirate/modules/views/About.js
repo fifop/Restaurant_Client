@@ -10,7 +10,7 @@ import { useTheme } from '@mui/material/styles';
 const About = () => {
     const theme = useTheme(); 
     return (
-      <div className="background-About">
+      <div id='about-section' className="background-About">
         <Box sx={{
           position: 'absolute',
           top: '40%',

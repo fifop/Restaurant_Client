@@ -17,22 +17,15 @@ const iconStyle = {
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: ' rgb(204 196 ,149)',
+  borderRadius: '50px', 
+
   mr: 1,
   '&:hover': {
-    bgcolor: 'warning.dark',
+    backgroundColor: "#319aa0",
   },
 };
 
-const LANGUAGES = [
-  {
-    code: 'en-US',
-    name: 'English',
-  },
-  {
-    code: 'fr-FR',
-    name: 'Français',
-  },
-];
+
 
 export default function AppFooter() {
   return (
@@ -40,7 +33,7 @@ export default function AppFooter() {
       component="footer"
       sx={{ display: 'flex', backgroundColor: '#d9a6ab' }}
     >
-      <Container sx={{ my: 1, display: 'flex' }}>
+      <Container sx={{ my: 0, display: 'flex' }}>
         <Grid container spacing={5}>
           <Grid item xs={6} sm={4} md={3}>
             <Grid

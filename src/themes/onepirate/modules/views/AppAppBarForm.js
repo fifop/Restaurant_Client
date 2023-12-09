@@ -2,7 +2,7 @@ import * as React from "react";
 import "./AppAppBar.css";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import AppBar from "../components/AppBar";
+import AppBarForm from "../components/AppBarForm";
 import Toolbar from "../components/Toolbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -10,17 +10,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useSelector,useDispatch } from "react-redux";
-import Typography from "../components/Typography";
-import { Link as RouterLink } from 'react-router-dom';
-import { logout } from "../components/features/auth/authSlice";
 
 
 
 
-function AppAppBar() {
+function AppAppBarForm() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -34,56 +31,28 @@ function AppAppBar() {
   const handleSignUpClick = () => {
     navigate('/signUp'); 
   };
-  const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
-  const handleLogoutClick = () => {
-
- dispatch(logout());
-    navigate('/'); 
-  };
-
-  
   return (
     <div>
-      <AppBar  sx={{ padding: 0, margin: 0 }}>
+      <AppBarForm  sx={{ padding: 0, margin: 0 }}>
         <Toolbar
           sx={{
             justifyContent: "space-between",
             padding: 0,
             borderBottom: "3px solid white",
+            display: 'flex',
+            backgroundImage: 'url(/images/324941.jpg)',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment:"scroll",
+            backgroundColor: '#ccc495', 
           }}
         >
- <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", width: "100%" }}>
-  <img
-    src="/images/GreyandBeigeRestaurantLOGO.png"
-    alt="Fifo Rest Logo"
-    style={{ height: "300px", width: "300px", margin: "-80PX" }}
-  />
-</Box>
-<Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end", width: "100%" }}>
-        {userInfo && (
-    <Button
-      onClick={handleLogoutClick}
-      sx={{
-        backgroundColor: "#319aa0",
-        color: "white",
-        fontWeight: "bold",
-        fontFamily: "cursive",
-        paddingRight: "30px",
-        paddingLeft: "30px",
-        marginRight: "30px",
-        fontSize: "14px",
-        "&:hover": {
-          backgroundColor: "#d9a6ab",
-        },}}
-    >
-      Logout
-    </Button>
-  )}
+          <Box sx={{ display: "flex", alignItems: "center", p: 0, m: 0 }}>
+            <img
+              src="/images/GreyandBeigeRestaurantLOGO.png"
+              alt="Fifo Rest Logo"
+              style={{ height: "300px", width: "300px", margin: "-80PX" }}
+              />
           </Box>
-
-
 
           <Box sx={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
             <IconButton
@@ -99,68 +68,68 @@ function AppAppBar() {
                 display: { sm: "flex", xs: "block" },
               }}
             >
-
-              
               <MenuIcon />
-            </IconButton>
-            
+            </IconButton>       
           </Box>
-      
         </Toolbar>
-        
-      </AppBar>
+      </AppBarForm>
 
+      {/* <Toolbar /> */}
 
-      <Drawer anchor="right" open={menuOpen} onClose={toggleMenu}>
-        <List className="list_background">
-          {!userInfo && (
-            <ListItem>
-              <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", mt: 4 }}>
-              <Button onClick={handleSignInClick}
-  className="btn"
-  sx={{
-    backgroundColor: "#319aa0",
-    color: "white",
-    fontWeight: "bold",
-    fontFamily: "cursive",
-    paddingRight: "30px",
-    paddingLeft: "30px",
-    fontSize: "14px",
-    "&:hover": {
-      backgroundColor: "#d9a6ab",
-    },
-    mr: 1,
-  }}
+      <Drawer
+  anchor="right"
+  open={menuOpen}
+  onClose={toggleMenu}
+
 >
-  {"Log In"}
-</Button>
-<Button onClick={handleSignUpClick}
-  className="btn"
-  sx={{
-    backgroundColor: "#319aa0",
-    color: "white",
-    fontWeight: "bold",
-    fontFamily: "cursive",
-    paddingRight: "30px",
-    paddingLeft: "30px",
-    fontSize: "14px",
-    "&:hover": {
-      backgroundColor: "#d9a6ab",
-    },
-  }}
->
-  {"Sign Up"}
-</Button>
-              </Box>
-            </ListItem>
-          )}
-          <ListItem sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-            <RouterLink to="/user-info" style={{ textDecoration: 'none', color: 'white' }}>
-              <Typography sx={{ fontFamily: "cursive", fontSize: "20px", color: "white" }}>
-                {userInfo ? `Hello ${userInfo.name}` : "Hello Guest"}
-              </Typography>
-            </RouterLink>
-          </ListItem>
+  <List className="list_background">
+    <ListItem>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row", // הצג את הכפתורים ליד זה לצד זה
+          alignItems: "center",
+          justifyContent: "center",
+          mt: 4,
+        }}
+      >
+        <Button onClick={handleSignInClick}
+          className="btn"
+          sx={{
+            backgroundColor: "#319aa0",
+            color: "white",
+            fontWeight: "bold",
+            fontFamily: "cursive",
+            paddingRight: "30px",
+            paddingLeft: "30px",
+            fontSize: "14px",
+            "&:hover": {
+              backgroundColor: "#d9a6ab",
+            },
+            mr: 1,
+          }}
+        >
+          {"Log In"}
+        </Button>
+        <Button onClick={handleSignUpClick}
+          className="btn"
+          sx={{
+            backgroundColor: "#319aa0",
+            color: "white",
+            fontWeight: "bold",
+            fontFamily: "cursive",
+            paddingRight: "30px",
+            paddingLeft: "30px",
+            fontSize: "14px",
+            "&:hover": {
+              backgroundColor: "#d9a6ab",
+            },
+          }}
+        >
+          {"Sign Up"}
+        </Button>
+      </Box>
+    </ListItem>
     <ListItem className="category-separator" />
 
     <ListItem
@@ -171,10 +140,10 @@ function AppAppBar() {
         flexDirection: "column",
       }}
     >
-      <Link onClick ={()=>{setMenuOpen(false)}}
+      <Link
         variant="h6"
         underline="none"
-        href="#about-section"
+        href="/about"
         sx={{
           color: "white",
           fontSize: "20px",
@@ -198,10 +167,10 @@ function AppAppBar() {
         flexDirection: "column",
       }}
     >
-      <Link  onClick ={()=>{setMenuOpen(false)}}
+      <Link
         variant="h6"
         underline="none"
-        href="#menu-section"
+        href="/menu"
         sx={{
           color: "white",
           fontSize: "20px",
@@ -225,7 +194,7 @@ function AppAppBar() {
         flexDirection: "column",
       }}
     >
-      <Link onClick ={()=>{setMenuOpen(false)}}
+      <Link
         variant="h6"
         underline="none"
         href="/contact"
@@ -281,4 +250,4 @@ function AppAppBar() {
   );
 }
 
-export default AppAppBar;
+export default AppAppBarForm;

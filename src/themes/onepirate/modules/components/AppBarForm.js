@@ -2,12 +2,11 @@ import MuiAppBar from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
 
 
-const AppBar = styled(MuiAppBar)({
-  backgroundColor: 'transparent',
+const AppBarForm = styled(MuiAppBar)({
+  backgroundColor: '#ccc495',
   boxShadow: 'none',
-  position: 'fixed',
+  position: 'static',
 });
 
 
-export default AppBar;
-
+export default AppBarForm;

@@ -69,7 +69,7 @@ export default function ProductCategories() {
   }, [url]);
 
   return (
-    <div className='background'>
+    <div id="menu-section" className='background'>
       <Container>
         <Typography variant="h4" 
       align="center" component="h2"

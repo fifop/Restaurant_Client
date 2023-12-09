@@ -1,14 +1,27 @@
 import './App.css';
-import Home from './themes/onepirate/Home'
 import React from "react";
-
+import {configureStore} from '@reduxjs/toolkit'
+import {Provider} from 'react-redux'
+import authReducer from
+ './themes/onepirate/modules/components/features/auth/authSlice.js'
 import AppRoutes from './appRoutes';
+
+const myStore = configureStore({
+  reducer: {
+    auth: authReducer
+  }
+})
+
 
 
 function App() {
   return (
     <div className="App">
-      <AppRoutes />
+         <Provider store={myStore}>
+
+         <AppRoutes />
+      </Provider>
+
     </div>
   );
 }
