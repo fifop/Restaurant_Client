@@ -1,8 +1,9 @@
 import * as React from "react";
 import "./AppAppBar.css";
+import "./AppAppBarForm.css";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import AppBarForm from "../components/AppBarForm";
+import AppBar from "../components/AppBar";
 import Toolbar from "../components/Toolbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -10,13 +11,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
-
-
-
+import { useSelector, useDispatch } from "react-redux";
+import Typography from "../components/Typography";
+import { Link as RouterLink } from 'react-router-dom';
+import { Link as ScrollLink } from "react-scroll";
+ 
 function AppAppBarForm() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -28,30 +29,30 @@ function AppAppBarForm() {
   const handleSignInClick = () => {
     navigate('/login'); 
   };
+
   const handleSignUpClick = () => {
     navigate('/signUp'); 
   };
+
+  const { userInfo, role } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   return (
-    <div>
-      <AppBarForm  sx={{ padding: 0, margin: 0 }}>
+    <div className="app-bar-form-container">
+      <AppBar  sx={{ padding: 0, margin: 0 }}>
         <Toolbar
           sx={{
             justifyContent: "space-between",
             padding: 0,
             borderBottom: "3px solid white",
-            display: 'flex',
-            backgroundImage: 'url(/images/324941.jpg)',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment:"scroll",
-            backgroundColor: '#ccc495', 
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", p: 0, m: 0 }}>
-            <img
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start", width: "100%" }}>
+            <img onClick={()=>navigate("/")}
               src="/images/GreyandBeigeRestaurantLOGO.png"
               alt="Fifo Rest Logo"
               style={{ height: "300px", width: "300px", margin: "-80PX" }}
-              />
+            />
           </Box>
 
           <Box sx={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
@@ -69,183 +70,263 @@ function AppAppBarForm() {
               }}
             >
               <MenuIcon />
-            </IconButton>       
+            </IconButton>
           </Box>
         </Toolbar>
-      </AppBarForm>
+      </AppBar>
 
-      {/* <Toolbar /> */}
-
-      <Drawer
-  anchor="right"
-  open={menuOpen}
-  onClose={toggleMenu}
-
+      <Drawer anchor="right" open={menuOpen} onClose={toggleMenu}>
+        <List className="list_background">
+          {!userInfo && (
+            <ListItem>
+              <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", mt: 4 }}>
+                <Button
+                  onClick={handleSignInClick}
+                  className="btn"
+                  sx={{
+                    backgroundColor: "#319aa0",
+                    color: "white",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                    paddingRight: "30px",
+                    paddingLeft: "30px",
+                    fontSize: "14px",
+                    "&:hover": {
+                      backgroundColor: "#d9a6ab",
+                    },
+                    mr: 1,
+                  }}
+                >
+                  {"Log In"}
+                </Button>
+                <Button
+                  onClick={handleSignUpClick}
+                  className="btn"
+                  sx={{
+                    backgroundColor: "#319aa0",
+                    color: "white",
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                    paddingRight: "30px",
+                    paddingLeft: "30px",
+                    fontSize: "14px",
+                    "&:hover": {
+                      backgroundColor: "#d9a6ab",
+                    },
+                  }}
+                >
+                  {"Sign Up"}
+                </Button>
+              </Box>
+            </ListItem>
+          )}
+          <ListItem sx={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+          
+        <a
+  href="/"
+  onClick={() => setMenuOpen(false)}
+  style={{ textDecoration: "none", color: "white" }}
 >
-  <List className="list_background">
-    <ListItem>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row", // הצג את הכפתורים ליד זה לצד זה
-          alignItems: "center",
-          justifyContent: "center",
-          mt: 4,
-        }}
-      >
-        <Button onClick={handleSignInClick}
-          className="btn"
-          sx={{
-            backgroundColor: "#319aa0",
-            color: "white",
-            fontWeight: "bold",
-            fontFamily: "cursive",
-            paddingRight: "30px",
-            paddingLeft: "30px",
-            fontSize: "14px",
-            "&:hover": {
-              backgroundColor: "#d9a6ab",
-            },
-            mr: 1,
-          }}
-        >
-          {"Log In"}
-        </Button>
-        <Button onClick={handleSignUpClick}
-          className="btn"
-          sx={{
-            backgroundColor: "#319aa0",
-            color: "white",
-            fontWeight: "bold",
-            fontFamily: "cursive",
-            paddingRight: "30px",
-            paddingLeft: "30px",
-            fontSize: "14px",
-            "&:hover": {
-              backgroundColor: "#d9a6ab",
-            },
-          }}
-        >
-          {"Sign Up"}
-        </Button>
-      </Box>
-    </ListItem>
-    <ListItem className="category-separator" />
+  <Typography
+    sx={{ fontFamily: "cursive", fontSize: "20px", color: "white" }}
+  >
+    {userInfo ? `Hello ${userInfo.name}` : "Hello Guest"}
+  </Typography>
+</a>
+          </ListItem>
+          <ListItem className="category-separator" />
+          <ListItem
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Link
+            component={RouterLink}
+            to="/?section=about-section"
+             onClick={() => {
+                setMenuOpen(false);
+              }}
+              variant="h6"
+              underline="none"
+              href="#about-section"
+              sx={{
+                color: "white",
+                fontSize: "20px",
+                "&:hover": {
+                  backgroundColor: "#d9a6ab",
+                },
+                fontWeight: "bold",
+                fontFamily: "cursive",
+              }}
+            >
+              About
+            </Link>
+          </ListItem>
+          <ListItem className="category-separator" />
+          <ListItem
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Link
+              component={RouterLink}
+              to="/?section=menu-section"
+              onClick={() => {
+                setMenuOpen(false);
+              }}
+              variant="h6"
+              underline="none"
+              href="#menu-section"
+              sx={{
+                color: "white",
+                fontSize: "20px",
+                "&:hover": {
+                  backgroundColor: "#d9a6ab",
+                },
+                fontWeight: "bold",
+                fontFamily: "cursive",
+              }}
+            >
+              Our Menu
+            </Link>
+          </ListItem>
+          <ListItem className="category-separator" />
+          <ListItem
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  }}
+>
+<Link
+    component={RouterLink}
+    to="/?section=book-section"
+    onClick={() => {
+      setMenuOpen(false);
+      const bookSection = document.getElementById("book-section");
+      if (bookSection) {
+        bookSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }}
+    variant="h6"
+    underline="none"
+    href="#book-section"
 
-    <ListItem
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Link
-        variant="h6"
-        underline="none"
-        href="/about"
-        sx={{
-          color: "white",
-          fontSize: "20px",
-          "&:hover": {
-            backgroundColor: "#d9a6ab",
-          },
-          fontWeight: "bold",
-          fontFamily: "cursive",
-        }}
-      >
-        About
-      </Link>
-    </ListItem>
-    <ListItem className="category-separator" />
+    sx={{
+      color: "white",
+      fontSize: "20px",
+      "&:hover": {
+        backgroundColor: "#d9a6ab",
+      },
+      fontWeight: "bold",
+      fontFamily: "cursive",
+      textAlign: "center",
+      alignContent: "center",
+    }}
+  >
+    Book a table
+  </Link>
+</ListItem>
+          <ListItem className="category-separator" />
+          {role === "admin" && (
+            <><ListItem
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+              <Link
+                component={RouterLink}
+                to="/workers"
+                onClick={() => setMenuOpen(false)}
+                variant="h6"
+                underline="none"
+                sx={{
+                  color: "white",
+                  fontSize: "20px",
+                  "&:hover": {
+                    backgroundColor: "#d9a6ab",
+                  },
+                  fontWeight: "bold",
+                  fontFamily: "cursive",
+                  textAlign: "center",
+                  alignContent: "center",
+                }}
+              >
+                Our Workers
+              </Link>
+            </ListItem><ListItem
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+          <ListItem className="category-separator" />
 
-    <ListItem
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Link
-        variant="h6"
-        underline="none"
-        href="/menu"
-        sx={{
-          color: "white",
-          fontSize: "20px",
-          "&:hover": {
-            backgroundColor: "#d9a6ab",
-          },
-          fontWeight: "bold",
-          fontFamily: "cursive",
-        }}
-      >
-        Our Menu
-      </Link>
-    </ListItem>
-    <ListItem className="category-separator" />
-
-    <ListItem
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Link
-        variant="h6"
-        underline="none"
-        href="/contact"
-        sx={{
-          color: "white",
-          fontSize: "20px",
-          "&:hover": {
-            backgroundColor: "#d9a6ab",
-          },
-          fontWeight: "bold",
-          fontFamily: "cursive",
-          textAlign: "center",
-          alignContent: "center",
-        }}
-      >
-        Book a table
-      </Link>
-    </ListItem>
-    <ListItem className="category-separator" />
-
-    <ListItem
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Button
-        onClick={toggleMenu}
-        sx={{
-          backgroundColor: "#319aa0",
-          color: "white",
-          fontWeight: "bold",
-          fontFamily: "cursive",
-          paddingRight: "30px",
-          paddingLeft: "30px",
-          fontSize: "14px",
-          "&:hover": {
-            backgroundColor: "#d9a6ab",
-          },
-        }}
-      >
-        Close
-      </Button>
-    </ListItem>
-  </List>
-</Drawer>
+                <Link
+                  component={RouterLink}
+                  to="/users"
+                  onClick={() => setMenuOpen(false)}
+                  variant="h6"
+                  underline="none"
+                  sx={{
+                    color: "white",
+                    fontSize: "20px",
+                    "&:hover": {
+                      backgroundColor: "#d9a6ab",
+                    },
+                    fontWeight: "bold",
+                    fontFamily: "cursive",
+                    textAlign: "center",
+                    alignContent: "center",
+                  }}
+                >
+                  User Mangment
+                </Link>
+              </ListItem></>
 
 
-      {/* <Toolbar /> */}
+          )}
+          <ListItem className="category-separator" />
+          <ListItem
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Button
+              onClick={toggleMenu}
+              sx={{
+                backgroundColor: "#319aa0",
+                color: "white",
+                fontWeight: "bold",
+                fontFamily: "cursive",
+                paddingRight: "30px",
+                paddingLeft: "30px",
+                fontSize: "14px",
+                "&:hover": {
+                  backgroundColor: "#d9a6ab",
+                },
+              }}
+            >
+              Close
+            </Button>
+          </ListItem>
+        </List>
+      </Drawer>
     </div>
   );
 }

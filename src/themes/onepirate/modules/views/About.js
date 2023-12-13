@@ -10,7 +10,7 @@ import { useTheme } from '@mui/material/styles';
 const About = () => {
     const theme = useTheme(); 
     return (
-      <div id='about-section' className="background-About">
+      <section id='about-section' className="background-About">
         <Box sx={{
           position: 'absolute',
           top: '40%',
@@ -47,7 +47,7 @@ const About = () => {
 מטבח ים תיכוני עכשיו, מבוסס חומרי גלם מקומיים המוגשים בצלחות קטנות, המיועדות לחלוקה ולחגיגה משותפת של האורחים בשולחן. השף שואב את השראתו מכל אגן הים התיכון עם חיבה מיוחדת לחופיה של ספרד. התפריט משתנה באופן תדיר לפי חשקי השף וחומרי גלם עונתיים.          {/* continue your text */}
 </Typography>
         </Box>   
-      </div>
+      </section>
     );
   };
   

@@ -29,6 +29,7 @@ const iconStyle = {
 
 export default function AppFooter() {
   return (
+    
     <Typography
       component="footer"
       sx={{ display: 'flex', backgroundColor: '#d9a6ab' }}

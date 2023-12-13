@@ -9,6 +9,25 @@ import axios from "axios";
  // for Get request only
 export const doApiGet = async(_url) => {
     try{
+      const token=JSON.parse(localStorage.getItem(TOKEN_KEY)).userToken
+      let resp = await axios({
+        url:_url,
+        method: "GET",
+        headers: {
+          "x-api-key": token
+        }
+      })
+      
+      return resp.data;
+    }
+    catch(err){
+      console.log(err);
+      throw err;
+    }
+  }
+
+  export const doApiGetNoToken = async(_url) => {
+    try{
       // const token=JSON.parse(localStorage.getItem(TOKEN_KEY)).userToken
       let resp = await axios({
         url:_url,

@@ -1,0 +1,59 @@
+.background-container {
+    background: url('/public/images/324941.jpg') ;
+    width: 100%;
+    justify-content: center;
+    display: block;
+    align-items: center;  
+
+   
+  }
+
+  .app-bar-form-container {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .add-worker-button {
+    position: absolute;
+    top: 20px;
+    left: 600px; 
+    z-index: 1; 
+  }
+  .worker-list {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    margin-top: 60px; 
+ 
+
+
+  }
+  
+  .worker-list:hover {
+    background-color: rgba(255, 255, 255, 0.6); 
+  }
+  /* .menu-btn {
+    z-index: 9999; 
+  } */
+
+  .workers-page {
+    padding-top: 100px; /* Adjust the value as needed */
+    background: url('/public/images/324941.jpg') ;
+
+
+}
+  @media (max-width: 600px) {
+    /* Styles for smaller screens */
+    .worker-list {
+      margin-top: 60px; 
+    }
+  }
+  @media (max-width: 600px) {
+    .add-worker-button {
+      top: 0px; /* New top position for smaller screens */
+      left: calc(100% - 320px); /* Adjust the left position as needed */
+    }
+  }

@@ -1,11 +1,11 @@
 import React from 'react';
-import './Background_Home.css'; // Your existing CSS file
+import './Background_Home.css'; 
 
 const Background_Home = ({ children }) => {
   return (
-    <div className="background-home">
+    <section id="section-home" className="background-home">
       {children}
-    </div>
+    </section>
   );
 };
 

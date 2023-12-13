@@ -25,7 +25,7 @@ function LogIn() {
 
   useEffect(() => {
     if (userInfo) {
-      if (userInfo.role === "admin") {
+      if (userInfo.role === "admin"||userInfo.role === "user") {
         navigate("/");
       } else {
         navigate("/user-profile");
