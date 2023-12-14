@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Service api
- export  const API_URL = "http://localhost:3006";
+ export  const API_URL = "https://restaurant-project-cczl.onrender.com";
  export const TOKEN_KEY = "rest_token";
 
 
