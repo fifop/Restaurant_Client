@@ -21,6 +21,8 @@ export default function AddDish() {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const nav = useNavigate();
     const categoryOptions = ["starter", "main course", "dessert", "beverage"];
+    const [category, setCategory] = useState('');
+
 
     const onSub = async (bodyData) => {
         try {
@@ -104,10 +106,9 @@ export default function AddDish() {
   inputProps={{
     id: "category",
   }}
-  value={""} // Initialize the value with an empty string
-  onChange={(e) => {
-    // Handle the value change if needed
-  }}
+  value={category}
+  onChange={(e) => setCategory(e.target.value)}
+
 >
   {categoryOptions.map((option) => (
     <MenuItem key={option} value={option}>
